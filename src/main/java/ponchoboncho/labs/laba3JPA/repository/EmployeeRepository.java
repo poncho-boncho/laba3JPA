@@ -1,13 +1,18 @@
 package ponchoboncho.labs.laba3JPA.repository;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ponchoboncho.labs.laba3JPA.model.Employee;
 
+import java.util.List;
+
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+    @Override
+    <S extends Employee> List<S> findAll(Example<S> example);
 
-   /* private List<Employee> employees;
+    /* private List<Employee> employees;
     private static int COUNT;
 
     {

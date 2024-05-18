@@ -9,12 +9,8 @@ import ponchoboncho.labs.laba3JPA.services.AppService;
 @SpringBootApplication
 public class Laba3JpaApplication {
 
-private final AppService appService;
-
-@Autowired
-public Laba3JpaApplication(AppService appService){
-	this.appService = appService;
-}
+	@Autowired
+	private AppService appService;
 
 
 	public static void main(String[] args) {

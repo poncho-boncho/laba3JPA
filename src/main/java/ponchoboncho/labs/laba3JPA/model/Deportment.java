@@ -2,9 +2,10 @@ package ponchoboncho.labs.laba3JPA.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import javax.annotation.processing.Generated;
 import java.util.List;
 
 @Repository
@@ -13,7 +14,7 @@ import java.util.List;
 public class Deportment {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name")
@@ -25,10 +26,10 @@ public class Deportment {
     @Column(name = "list_rooms")
     private String listRooms;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "link_head")
-   // @JoinColumn(name = "id")
-    private List<Staff> staffs = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    //@Column(name = "link_head")
+    @JoinColumn(name = "link_head")
+    private Staff staff;
 
     public Integer getId() {
         return id;
@@ -62,11 +63,11 @@ public class Deportment {
         this.listRooms = listRooms;
     }
 
-    public List<Staff> getStaffs() {
-        return staffs;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setStaffs(List<Staff> staffs) {
-        this.staffs = staffs;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

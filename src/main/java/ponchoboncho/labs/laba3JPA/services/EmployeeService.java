@@ -11,11 +11,9 @@ import java.util.List;
 @Service
 public interface EmployeeService {
 
-   // void create (Employee employee);
-
-    Employee addEmployee(Employee employee);
-
     List<Employee> getAll();
+
+   // void create (Employee employee);
 
     /*
     private final EmployeeRepository employeeRepository;

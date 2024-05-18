@@ -12,18 +12,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private final EmployeeRepository employeeRepository;
-
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
-    @Override
-    public Employee addEmployee(Employee employee) {
-        Employee savedEmployee = employeeRepository.saveAndFlush(employee);
-
-        return savedEmployee;
-    }
+    private EmployeeRepository employeeRepository;
 
     @Override
     public List<Employee> getAll() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Table(name = "staff")
 public class Staff {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "fio")
@@ -26,7 +26,13 @@ public class Staff {
     @Column(name = "post")
     private String post;
 
+    public String getFio() {
+        return fio;
+    }
 
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
 
     public Integer getId() {
         return id;
@@ -34,5 +40,37 @@ public class Staff {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOtdel() {
+        return otdel;
+    }
+
+    public void setOtdel(String otdel) {
+        this.otdel = otdel;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
     }
 }
