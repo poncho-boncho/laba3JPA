@@ -2,11 +2,10 @@ package ponchoboncho.labs.laba3JPA.model;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.processing.Generated;
-import java.util.List;
 
 @Repository
 @Entity
@@ -26,7 +25,8 @@ public class Deportment {
     @Column(name = "list_rooms")
     private String listRooms;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     //@Column(name = "link_head")
     @JoinColumn(name = "link_head")
     private Staff staff;

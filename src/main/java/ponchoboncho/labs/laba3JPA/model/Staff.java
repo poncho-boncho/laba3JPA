@@ -3,6 +3,8 @@ package ponchoboncho.labs.laba3JPA.model;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Entity
 @Table(name = "staff")
@@ -25,6 +27,12 @@ public class Staff {
 
     @Column(name = "post")
     private String post;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY, mappedBy = "staff")
+    private List<Deportment> deportments;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "staff")
+    private List<Organisation> organisations;
 
     public String getFio() {
         return fio;

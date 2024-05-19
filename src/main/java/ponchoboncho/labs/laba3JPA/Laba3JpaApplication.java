@@ -16,9 +16,6 @@ public class Laba3JpaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Laba3JpaApplication.class, args);
 
-		//AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-		//		JavaConfig.class
-		//);
 	}
 
 }

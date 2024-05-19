@@ -12,7 +12,7 @@ import java.util.List;
 public class Organisation {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name")
@@ -21,10 +21,10 @@ public class Organisation {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "link_head")
-    //@JoinColumn(name = "id")
-    private List<Staff> staffs = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.MERGE)
+    //@Column(name = "link_head")
+    @JoinColumn(name = "link_head")
+    private Staff staff;
 
     public Integer getId() {
         return id;
@@ -50,11 +50,11 @@ public class Organisation {
         this.address = address;
     }
 
-    public List<Staff> getStaffs() {
-        return staffs;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setStaffs(List<Staff> staffs) {
-        this.staffs = staffs;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

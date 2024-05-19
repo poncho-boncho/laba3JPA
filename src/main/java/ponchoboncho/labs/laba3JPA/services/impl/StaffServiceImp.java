@@ -2,6 +2,7 @@ package ponchoboncho.labs.laba3JPA.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ponchoboncho.labs.laba3JPA.model.Staff;
 import ponchoboncho.labs.laba3JPA.repository.StaffRepository;
 import ponchoboncho.labs.laba3JPA.services.StaffService;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class StaffServiceImp implements StaffService {
 
     @Autowired

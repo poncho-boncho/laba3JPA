@@ -1,4 +1,14 @@
 package ponchoboncho.labs.laba3JPA.services;
 
+import ponchoboncho.labs.laba3JPA.model.Organisation;
+import ponchoboncho.labs.laba3JPA.model.Staff;
+
+import java.util.List;
+
 public interface OrganisationService {
+    List<Organisation> getAll();
+
+    Organisation addOrganisation (Organisation organisation);
+
+    void delete(int id);
 }

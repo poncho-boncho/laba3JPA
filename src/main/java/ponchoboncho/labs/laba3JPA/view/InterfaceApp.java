@@ -1,18 +1,14 @@
 package ponchoboncho.labs.laba3JPA.view;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 //import ponchoboncho.labs.laba3JPA.services.DepartmentService;
+import org.springframework.transaction.annotation.Transactional;
 import ponchoboncho.labs.laba3JPA.model.Deportment;
-import ponchoboncho.labs.laba3JPA.model.Employee;
+import ponchoboncho.labs.laba3JPA.model.Organisation;
 import ponchoboncho.labs.laba3JPA.model.Staff;
-import ponchoboncho.labs.laba3JPA.services.EmployeeService;
-import ponchoboncho.labs.laba3JPA.services.StaffService;
 import ponchoboncho.labs.laba3JPA.services.impl.DeportmentServiceImpl;
-import ponchoboncho.labs.laba3JPA.services.impl.EmployeeServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ponchoboncho.labs.laba3JPA.services.impl.OrganisationImpl;
 import ponchoboncho.labs.laba3JPA.services.impl.StaffServiceImp;
 
 import java.util.*;
@@ -21,15 +17,13 @@ import java.util.*;
 public class InterfaceApp {
 
     @Autowired
-    private EmployeeServiceImpl employeeService;
-    @Autowired
     private DeportmentServiceImpl deportmentService;
 
     @Autowired
-    private StaffServiceImp staffService;
-    //private final DepartmentService departmentService;
+    private OrganisationImpl organisationService;
 
-    Gson gson = new Gson();
+    @Autowired
+    private StaffServiceImp staffService;
 
     Scanner in = new Scanner(System.in);
     int num;
@@ -40,19 +34,19 @@ public class InterfaceApp {
                 "3 - Udalit zapis Deportment\n"+
                 "4 - Pokazat tablicu Staff \n"+
                 "5 - Sozdat Staff \n"+
-                "6 - Udalit zapis \n"+
-                "7 - Udalit zapis o Department \n"+
-                "8 - Nayti zapis po pervim bukvam name (Department) \n"+
-                "9 - zavershit programmu");
+                "6 - Udalit zapis Staff \n"+
+                "7 - Pokazat tablicu Organisation \n"+
+                "8 - Sozdat Organisation \n"+
+                "9 - Udalit zapis Organisation");
     }
 
     public void meny(){
-        while (num !=9){
+        while (num !=10){
             inform();
             num = in.nextInt();
             if (num == 1){
                 for (Deportment i:deportmentService.getAll()) {
-                    System.out.printf("id: %d \t Name: %s \t number Employees: %s list rooms: %s limk head (FIO): %s \n",
+                    System.out.printf("id: %d \t Name: %s \t number Employees: %s list rooms: %s link head (FIO): %s \n",
                             i.getId(),
                             i.getName(),
                             i.getNumberEmployees(),
@@ -63,16 +57,22 @@ public class InterfaceApp {
             }
             if (num == 2){
                 Deportment deportment = new Deportment();
-                //Staff staff = new Staff();
-                //deportment.setId(6);
-                deportment.setName("qwerty");
-                deportment.setNumberEmployees("2");
-                deportment.setListRooms("23, 1, 22");
-                deportment.setStaff(staffService.getById(1).orElse(null));
+                in.nextLine();
+                System.out.println("Vvedite name otdela");
+                deportment.setName(in.nextLine());
+                System.out.println("Vvedite kolichestvo sotrudnikov: ");
+                deportment.setNumberEmployees(in.nextLine());
+                System.out.println("Vvedite nomera komnat ");
+                deportment.setListRooms(in.nextLine());
+                while (deportment.getStaff()==null){
+                    System.out.println("Vvedite id nachalnika");
+                    deportment.setStaff(staffService.getById(in.nextInt()).orElse(null));
+                }
                 deportmentService.addDeportment(deportment);
             }
             if (num == 3){
-                deportmentService.delete(1);
+                System.out.println("Vedite id:");
+                deportmentService.delete(in.nextInt());
             }
             if(num == 4){
                 for (Staff s:staffService.getAll()){
@@ -88,65 +88,50 @@ public class InterfaceApp {
             }
             if (num ==5){
                 Staff staff = new Staff();
-                staff.setAddress("qwerty");
-                staff.setBirthDay("04.03.1999");
-                staff.setFio("Sorokin Nikolay Yrrich");
-                staff.setOtdel("IT");
-                staff.setPost("Boss");
+                in.nextLine();
+                System.out.println("vvedite adress: ");
+                staff.setAddress(in.nextLine());
+                System.out.println("vvedite den' rojdeniya ");
+                staff.setBirthDay(in.nextLine());
+                System.out.println("vvedite FIO ");
+                staff.setFio(in.nextLine());
+                System.out.println("vvedite Naimenovanie otdela");
+                staff.setOtdel(in.nextLine());
+                System.out.println("vvedite doljnost");
+                staff.setPost(in.nextLine());
                 staffService.addStaff(staff);
             }
             if (num == 6){
-                staffService.delete(2);
+                System.out.println("vvedi id na udalenie:");
+                staffService.delete(in.nextInt());
+            }
+            if (num == 7){
+                for (Organisation o:organisationService.getAll()) {
+                    System.out.printf("id: %d \t address: %s \t name: %s link head (FIO): %s \n",
+                            o.getId(),
+                            o.getAddress(),
+                            o.getName(),
+                            o.getStaff().getFio()
+                    );
+                }
+            }
+            if (num == 8){
+                Organisation organisation = new Organisation();
+                in.nextLine();
+                System.out.println("vvedite adress: ");
+                organisation.setAddress(in.nextLine());
+                System.out.println("vvedite Nazvanie");
+                organisation.setName(in.nextLine());
+                while (organisation.getStaff()==null) {
+                    System.out.println("Vvedite suhestvuishiy id nachalnika");
+                    organisation.setStaff(staffService.getById(in.nextInt()).orElse(null));
+                }
+                organisationService.addOrganisation(organisation);
+            }
+            if (num == 9){
+                System.out.println("Vedite id:");
+                organisationService.delete(in.nextInt());
             }
         }
     }
-
-
-/*    public void meny(){
-        while (num !=9){
-            inform();
-            num = in.nextInt();
-            if (num == 1){
-                System.out.println(employeeService.getEmployeeAll());
-            }
-            if(num == 2){
-                initForCreation("employee");
-                employeeService.create(
-                        attributes.get(0),
-                        attributes.get(1),
-                        attributes.get(2),
-                        attributes.get(3),
-                        attributes.get(4),
-                        attributes.get(5),
-                        attributes.get(6));
-            }
-            if (num == 3){
-                System.out.println("Vvedi index atributa na udalenie");
-                employeeService.deleteByIndex(Integer.parseInt(in.next())-1);
-            }
-            if (num == 4){
-                System.out.println("Vvedi na cho nachinaetsy lastName");
-                System.out.println(employeeService.getFindEmployee(in.next()));
-            }
-            if (num == 5){
-                System.out.println(departmentService.getDepormentAll());
-            }
-            if(num == 6){
-                initForCreation("deportment");
-                departmentService.create(
-                        attributes.get(0),
-                        Integer.parseInt(attributes.get(1)),
-                        Arrays.asList(attributes.get(2).split(" "))
-                );
-            }
-            if (num == 7){
-                System.out.println("Vvedi index atributa na udalenie");
-                departmentService.deleteByIndex(Integer.parseInt(in.next())-1);
-            }
-            if (num == 8){
-                System.out.println("Vvedi na chto nachinaetsy name department");
-                System.out.println(departmentService.getFindDepartment(in.next()));
-            }
-        }
-    }*/
 }
