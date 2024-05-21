@@ -3,6 +3,7 @@ package ponchoboncho.labs.laba3JPA.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ponchoboncho.labs.laba3JPA.model.Deportment;
 import ponchoboncho.labs.laba3JPA.model.Organisation;
 import ponchoboncho.labs.laba3JPA.repository.OrganisationRepository;
 import ponchoboncho.labs.laba3JPA.services.OrganisationService;
@@ -18,6 +19,10 @@ public class OrganisationImpl implements OrganisationService {
     @Override
     public List<Organisation> getAll() {
         return organisationRepository.findAll();
+    }
+
+    public Organisation getByName(String name) {
+        return organisationRepository.findByName(name);
     }
 
     @Override

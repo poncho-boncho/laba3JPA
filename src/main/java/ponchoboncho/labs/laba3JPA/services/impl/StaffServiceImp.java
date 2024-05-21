@@ -31,11 +31,11 @@ public class StaffServiceImp implements StaffService {
     public void delete(int id) {
         staffRepository.deleteById(id);
     }
-/*
+
     @Override
     public Staff getByName(String name) {
         return staffRepository.findByName(name);
-    }*/
+    }
 
     @Override
     public Optional<Staff> getById(Integer id) {

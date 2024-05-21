@@ -1,5 +1,6 @@
 package ponchoboncho.labs.laba3JPA.services;
 
+import ponchoboncho.labs.laba3JPA.model.Deportment;
 import ponchoboncho.labs.laba3JPA.model.Organisation;
 import ponchoboncho.labs.laba3JPA.model.Staff;
 
@@ -10,5 +11,6 @@ public interface OrganisationService {
 
     Organisation addOrganisation (Organisation organisation);
 
+    Organisation getByName(String name);
     void delete(int id);
 }

@@ -45,14 +45,26 @@ public class InterfaceApp {
             inform();
             num = in.nextInt();
             if (num == 1){
-                for (Deportment i:deportmentService.getAll()) {
-                    System.out.printf("id: %d \t Name: %s \t number Employees: %s list rooms: %s link head (FIO): %s \n",
-                            i.getId(),
-                            i.getName(),
-                            i.getNumberEmployees(),
-                            i.getListRooms(),
-                            i.getStaff().getFio()
-                    );
+                System.out.println("1 - pokazat vseh \n 2 - pokazat po pervim bukvam vvoda FIO");
+                in.nextInt();
+                if (num==1) {
+                    for (Deportment i : deportmentService.getAll()) {
+                        System.out.printf("id: %d \t Name: %s \t number Employees: %s list rooms: %s link head (FIO): %s \n",
+                                i.getId(),
+                                i.getName(),
+                                i.getNumberEmployees(),
+                                i.getListRooms(),
+                                i.getStaff().getFio()
+                        );
+                    }
+                } else {
+                    System.out.println("Vvedi pervie bukvi name");
+                    in.nextLine();
+                    String name = in.nextLine();
+                    if (deportmentService.getByName(name)==null) {
+                        System.out.println("Takih net!!");
+                    }
+                    else System.out.println(deportmentService.getByName(name).getName());
                 }
             }
             if (num == 2){
@@ -65,7 +77,7 @@ public class InterfaceApp {
                 System.out.println("Vvedite nomera komnat ");
                 deportment.setListRooms(in.nextLine());
                 while (deportment.getStaff()==null){
-                    System.out.println("Vvedite id nachalnika");
+                    System.out.println("Vvedite suhestvuishiy id nachalnika");
                     deportment.setStaff(staffService.getById(in.nextInt()).orElse(null));
                 }
                 deportmentService.addDeportment(deportment);
@@ -75,15 +87,27 @@ public class InterfaceApp {
                 deportmentService.delete(in.nextInt());
             }
             if(num == 4){
-                for (Staff s:staffService.getAll()){
-                    System.out.printf("id: %d \t address: %s \t birthday: %s \t FIO: %s \t otdel: %s \t post: %s \n",
-                    s.getId(),
-                    s.getAddress(),
-                    s.getBirthDay(),
-                    s.getFio(),
-                    s.getOtdel(),
-                    s.getPost()
-                    );
+                System.out.println("1 - pokazat vseh \n 2 - pokazat po pervim bukvam vvoda FIO");
+                in.nextInt();
+                if (num == 1){
+                    for (Staff s:staffService.getAll()){
+                        System.out.printf("id: %d \t address: %s \t birthday: %s \t FIO: %s \t otdel: %s \t post: %s \n",
+                                s.getId(),
+                                s.getAddress(),
+                                s.getBirthDay(),
+                                s.getFio(),
+                                s.getOtdel(),
+                                s.getPost()
+                        );
+                    }
+                } else {
+                    System.out.println("Vvedi pervie bukvi FIO");
+                    in.nextLine();
+                    String fio = in.nextLine();
+                    if (staffService.getByName(fio)==null) {
+                        System.out.println("Takih net!!");
+                    }
+                    else System.out.println(staffService.getByName(fio).getFio());
                 }
             }
             if (num ==5){
@@ -106,16 +130,29 @@ public class InterfaceApp {
                 staffService.delete(in.nextInt());
             }
             if (num == 7){
-                for (Organisation o:organisationService.getAll()) {
-                    System.out.printf("id: %d \t address: %s \t name: %s link head (FIO): %s \n",
-                            o.getId(),
-                            o.getAddress(),
-                            o.getName(),
-                            o.getStaff().getFio()
-                    );
+                System.out.println("1 - pokazat vseh \n 2 - pokazat po pervim bukvam vvoda FIO");
+                in.nextInt();
+                if (num==1) {
+                    for (Organisation o:organisationService.getAll()) {
+                        System.out.printf("id: %d \t address: %s \t name: %s link head (FIO): %s \n",
+                                o.getId(),
+                                o.getAddress(),
+                                o.getName(),
+                                o.getStaff().getFio()
+                        );
+                    }
+                } else {
+                    System.out.println("Vvedi pervie bukvi name");
+                    in.nextLine();
+                    String name = in.nextLine();
+                    if (organisationService.getByName(name)==null) {
+                        System.out.println("Takih net!!");
+                    }
+                    else System.out.println(organisationService.getByName(name).getName());
                 }
             }
             if (num == 8){
+
                 Organisation organisation = new Organisation();
                 in.nextLine();
                 System.out.println("vvedite adress: ");
@@ -131,6 +168,10 @@ public class InterfaceApp {
             if (num == 9){
                 System.out.println("Vedite id:");
                 organisationService.delete(in.nextInt());
+            }
+            if(num ==20){
+
+                //staffService.getByName(fio);
             }
         }
     }

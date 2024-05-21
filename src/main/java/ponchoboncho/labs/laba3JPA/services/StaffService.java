@@ -16,4 +16,6 @@ public interface StaffService {
     //Staff getByName(String name);
 
     Optional<Staff> getById(Integer id);
+
+    Staff getByName(String name);
 }

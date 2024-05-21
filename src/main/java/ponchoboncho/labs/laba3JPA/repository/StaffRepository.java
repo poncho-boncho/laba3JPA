@@ -8,6 +8,6 @@ import ponchoboncho.labs.laba3JPA.model.Staff;
 
 @Repository
 public interface StaffRepository extends JpaRepository <Staff, Integer> {
-/*    @Query("select s from Staff s where s.fio = :fio")
-    Staff findByName(@Param("name") String name);*/
+    @Query("select s from Staff s where substring(s.fio,1,length(:fio))  = :fio ")
+    Staff findByName(@Param("fio") String name);
 }

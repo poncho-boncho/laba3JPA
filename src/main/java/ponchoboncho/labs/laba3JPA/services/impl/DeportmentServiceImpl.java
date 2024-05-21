@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ponchoboncho.labs.laba3JPA.model.Deportment;
+import ponchoboncho.labs.laba3JPA.model.Staff;
 import ponchoboncho.labs.laba3JPA.repository.DeportmentRepository;
 import ponchoboncho.labs.laba3JPA.services.DeportmentService;
 
@@ -20,6 +21,10 @@ public class DeportmentServiceImpl implements DeportmentService {
     @Override
     public List<Deportment> getAll() {
         return deportmentRepository.findAll();
+    }
+
+    public Deportment getByName(String name) {
+        return deportmentRepository.findByName(name);
     }
 
     @Override
