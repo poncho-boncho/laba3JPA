@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import ponchoboncho.labs.laba3JPA.model.Deportment;
 import ponchoboncho.labs.laba3JPA.model.Organisation;
 
+import java.util.List;
+
 @Repository
 public interface OrganisationRepository extends JpaRepository <Organisation, Integer> {
     @Query("select o from Organisation o where substring(o.name,1,length(:name))  = :name ")
-    Organisation findByName(@Param("name") String name);
+    List<Organisation> findByName(@Param("name") String name);
 }

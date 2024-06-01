@@ -13,7 +13,7 @@ public interface DeportmentService {
     List<Deportment> getAll();
     Deportment addDeportment(Deportment deportment);
 
-    Deportment getByName(String name);
+    List<Deportment> getByName(String name);
 
     void delete(int id);
 }

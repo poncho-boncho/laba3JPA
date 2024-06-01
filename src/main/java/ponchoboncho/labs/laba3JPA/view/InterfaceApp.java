@@ -60,7 +60,18 @@ public class InterfaceApp {
                     if (deportmentService.getByName(name)==null) {
                         System.out.println("Takih net!!");
                     }
-                    else System.out.println(deportmentService.getByName(name).getName());
+                    else{
+                        for (Deportment d : deportmentService.getByName(name)) {
+                            System.out.printf("id: %d \t Name: %s \t number Employees: %s list rooms: %s link head (FIO): %s \n",
+                                    d.getId(),
+                                    d.getName(),
+                                    d.getNumberEmployees(),
+                                    d.getListRooms(),
+                                    d.getStaff().getFio()
+                            );
+                        }
+                        //System.out.println(deportmentService.getByName(name).getName());
+                    }
                 }
             }
             if (num == 2){
@@ -99,7 +110,18 @@ public class InterfaceApp {
                     if (staffService.getByName(fio)==null) {
                         System.out.println("Takih net!!");
                     }
-                    else System.out.println(staffService.getByName(fio).getFio());
+                    else {
+                        for (Staff s:staffService.getByName(fio)){
+                            System.out.printf("id: %d \t address: %s \t birthday: %s \t FIO: %s \t otdel: %s \t post: %s \n",
+                                    s.getId(),
+                                    s.getAddress(),
+                                    s.getBirthDay(),
+                                    s.getFio(),
+                                    s.getOtdel(),
+                                    s.getPost());
+                        }
+                        //System.out.println(staffService.getByName(fio).getFio());
+                    }
                 }
             }
             if (num ==5){
@@ -136,7 +158,17 @@ public class InterfaceApp {
                     if (organisationService.getByName(name)==null) {
                         System.out.println("Takih net!!");
                     }
-                    else System.out.println(organisationService.getByName(name).getName());
+                    else{
+                        for (Organisation o:organisationService.getByName(name)) {
+                            System.out.printf("id: %d \t address: %s \t name: %s link head (FIO): %s \n",
+                                    o.getId(),
+                                    o.getAddress(),
+                                    o.getName(),
+                                    o.getStaff().getFio()
+                            );
+                        }
+                    }
+                        //System.out.println(organisationService.getByName(name).getName());
                 }
             }
             if (num == 8){

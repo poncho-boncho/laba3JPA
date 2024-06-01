@@ -21,7 +21,7 @@ public class OrganisationImpl implements OrganisationService {
         return organisationRepository.findAll();
     }
 
-    public Organisation getByName(String name) {
+    public List<Organisation> getByName(String name) {
         return organisationRepository.findByName(name);
     }
 

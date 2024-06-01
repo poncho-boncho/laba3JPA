@@ -11,6 +11,6 @@ public interface OrganisationService {
 
     Organisation addOrganisation (Organisation organisation);
 
-    Organisation getByName(String name);
+    List<Organisation> getByName(String name);
     void delete(int id);
 }

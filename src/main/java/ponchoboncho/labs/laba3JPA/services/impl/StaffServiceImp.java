@@ -33,7 +33,7 @@ public class StaffServiceImp implements StaffService {
     }
 
     @Override
-    public Staff getByName(String name) {
+    public List<Staff> getByName(String name) {
         return staffRepository.findByName(name);
     }
 

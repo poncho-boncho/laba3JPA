@@ -2,8 +2,6 @@ package ponchoboncho.labs.laba3JPA.model;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Repository;
 
 

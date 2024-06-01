@@ -23,7 +23,7 @@ public class DeportmentServiceImpl implements DeportmentService {
         return deportmentRepository.findAll();
     }
 
-    public Deportment getByName(String name) {
+    public List<Deportment> getByName(String name) {
         return deportmentRepository.findByName(name);
     }
 
